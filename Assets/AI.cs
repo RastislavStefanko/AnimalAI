@@ -28,6 +28,10 @@ public class AI : MonoBehaviour
 
     public float waitUntilDone = 0;
 
+    public float energy = 100;
+
+    public AnimationCurve curve;
+
     void Start()
     {
         eat = false;
@@ -38,10 +42,14 @@ public class AI : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(curve.Evaluate(0.2f));
         agent.destination = currentDestination.transform.position;
 
         if (waitUntilDone <= 0)
         {
+            anim.SetBool("sleep", false);
+            anim.SetBool("eat", false);
+            anim.SetBool("drink", false);
             planes = GeometryUtility.CalculateFrustumPlanes(sight);
             if (hunger < 0)
             {
@@ -56,6 +64,7 @@ public class AI : MonoBehaviour
             }
             else if (thirst < 0)
             {
+
                 currentDestination = gameObject;
                 if (currentDestination.tag != "water")
                 {
@@ -67,8 +76,16 @@ public class AI : MonoBehaviour
                     DrinkWater();
                 }
             }
+            else if (energy < 0)
+            {
+                energy = 140;
+                waitUntilDone = 40;
+                currentDestination = gameObject;
+                anim.SetBool("sleep", true);
+            }
             else
             {
+                anim.SetBool("sleep", false);
                 anim.SetBool("drink", false);
                 anim.SetBool("eat", false);
                 currentDestination = waypoints[0];
@@ -79,7 +96,8 @@ public class AI : MonoBehaviour
         {
             waitUntilDone -= Time.deltaTime;
         }
-        thirst -= Time.deltaTime * 0.1f;
+        energy -= Time.deltaTime*1.4f; 
+        thirst -= Time.deltaTime*1.2f;
         hunger -= Time.deltaTime;
     }
 
@@ -113,12 +131,12 @@ public class AI : MonoBehaviour
         }
         else
         {
-            
+
             foreach (GameObject leaf in leafs)
             {
                 if (GeometryUtility.TestPlanesAABB(planes, leaf.GetComponent<Collider>().bounds))
                 {
-                    
+
                     if (Vector3.Distance(currentDestination.transform.position, transform.position) >= Vector3.Distance(leaf.transform.position, transform.position))
                     {
                         currentDestination = leaf;
