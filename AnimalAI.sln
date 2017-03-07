@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalAI.CSharp", "AnimalAI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalAI.CSharp.Editor.Plugins", "AnimalAI.CSharp.Editor.Plugins.csproj", "{A0396D9E-8029-A7D4-88F4-B644282D1135}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalAI.CSharp.Editor", "AnimalAI.CSharp.Editor.csproj", "{584B9726-E02B-421F-DFCC-73D930546E71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{A0396D9E-8029-A7D4-88F4-B644282D1135}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0396D9E-8029-A7D4-88F4-B644282D1135}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0396D9E-8029-A7D4-88F4-B644282D1135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{584B9726-E02B-421F-DFCC-73D930546E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{584B9726-E02B-421F-DFCC-73D930546E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{584B9726-E02B-421F-DFCC-73D930546E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{584B9726-E02B-421F-DFCC-73D930546E71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

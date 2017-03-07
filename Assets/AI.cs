@@ -30,7 +30,10 @@ public class AI : MonoBehaviour
 
     public float energy = 100;
 
-    public AnimationCurve curve;
+    public UtilityAI giraffeAI;
+
+    [Range(0,10)]
+    public float timeSpeed = 1;
 
     void Start()
     {
@@ -42,7 +45,8 @@ public class AI : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(curve.Evaluate(0.2f));
+        Time.timeScale = timeSpeed;
+        Debug.Log(giraffeAI.GetUtility());
         agent.destination = currentDestination.transform.position;
 
         if (waitUntilDone <= 0)
@@ -51,44 +55,45 @@ public class AI : MonoBehaviour
             anim.SetBool("eat", false);
             anim.SetBool("drink", false);
             planes = GeometryUtility.CalculateFrustumPlanes(sight);
-            if (hunger < 0)
+            switch (giraffeAI.GetUtility())
             {
-                if (!eat)
-                {
-                    FindFood();
-                }
-                else
-                {
-                    Eat();
-                }
-            }
-            else if (thirst < 0)
-            {
+                case "hunger":
+                    if (!eat)
+                    {
+                        FindFood();
+                    }
+                    else
+                    {
+                        Eat();
+                    }
+                    break;
+                case "thirst":
+                    currentDestination = gameObject;
+                    if (currentDestination.tag != "water")
+                    {
+                        FindWater();
+                    }
 
-                currentDestination = gameObject;
-                if (currentDestination.tag != "water")
-                {
-                    FindWater();
-                }
-
-                if (currentDestination.tag == "water" && drink)
-                {
-                    DrinkWater();
-                }
-            }
-            else if (energy < 0)
-            {
-                energy = 140;
-                waitUntilDone = 40;
-                currentDestination = gameObject;
-                anim.SetBool("sleep", true);
-            }
-            else
-            {
-                anim.SetBool("sleep", false);
-                anim.SetBool("drink", false);
-                anim.SetBool("eat", false);
-                currentDestination = waypoints[0];
+                    if (currentDestination.tag == "water" && drink)
+                    {
+                        DrinkWater();
+                    }
+                    break;
+                case "sleep":
+                    giraffeAI.SetValue("sleep");
+                    giraffeAI.SetValue("walk");
+                    waitUntilDone = 30;
+                    currentDestination = gameObject;
+                    anim.SetBool("sleep", true);
+                    break;
+                case "walk":
+                    anim.SetBool("sleep", false);
+                    anim.SetBool("drink", false);
+                    anim.SetBool("eat", false);
+                    currentDestination = waypoints[0];
+                    break;
+                default:
+                    break;
             }
 
         }
@@ -96,21 +101,19 @@ public class AI : MonoBehaviour
         {
             waitUntilDone -= Time.deltaTime;
         }
-        energy -= Time.deltaTime*1.4f; 
-        thirst -= Time.deltaTime*1.2f;
-        hunger -= Time.deltaTime;
     }
 
-    void Eat()
+    public void Eat()
     {
         currentDestination = gameObject;
-        hunger = 100;
+        giraffeAI.SetValue("hunger");
+        giraffeAI.PlusValue("walk", 140);
         anim.SetBool("eat", true);
         waitUntilDone = eatTime;
         eat = false;
     }
 
-    void FindFood()
+    public void FindFood()
     {
         GameObject[] leafs = GameObject.FindGameObjectsWithTag("leafs");
         if (currentDestination.tag != "leafs")
@@ -126,7 +129,7 @@ public class AI : MonoBehaviour
 
             if (currentDestination.tag != "leafs")
             {
-                transform.Rotate(0, -1, 0);
+                transform.Rotate(0, -timeSpeed, 0);
             }
         }
         else
@@ -151,7 +154,7 @@ public class AI : MonoBehaviour
     void DrinkWater()
     {
         currentDestination = gameObject;
-        thirst = 100;
+        giraffeAI.SetValue("thirst");
         anim.SetBool("drink", true);
         waitUntilDone = drinkTime;
         drink = false;
@@ -170,7 +173,7 @@ public class AI : MonoBehaviour
 
         if (currentDestination.tag != "water")
         {
-            transform.Rotate(0, -1, 0);
+            transform.Rotate(0, -timeSpeed, 0);
         }
 
     }
