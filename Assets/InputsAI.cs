@@ -19,7 +19,10 @@ public class InputsAI : MonoBehaviour {
     {
         for(int i = 0; i < inputs.Count; i++)
         {
-            inputs[i].currentValue -= Time.deltaTime;
+            if (!inputs[i].isActive)
+            {
+                inputs[i].currentValue -= Time.deltaTime;
+            }
         }
     }
 }

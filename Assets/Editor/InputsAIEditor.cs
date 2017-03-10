@@ -43,19 +43,13 @@ public class InputsAIEditor : Editor {
             return;
         }
 
-        SerializedProperty listIterator = serializedObject.FindProperty("inputs");
-
-        
-
         GUILayout.BeginHorizontal();
         {
-
-            
-
             EditorGUI.BeginChangeCheck();
             string newName = GUILayout.TextField(m_Target.inputs[index].name, GUILayout.Width(80));
             float newStartValue = EditorGUILayout.FloatField("", m_Target.inputs[index].startValue, GUILayout.Width(80));
             float newCurrentValue = EditorGUILayout.FloatField("", m_Target.inputs[index].currentValue, GUILayout.Width(80));
+            bool newIsActive = EditorGUILayout.Toggle(m_Target.inputs[index].isActive, GUILayout.Width(10));
 
             if (EditorGUI.EndChangeCheck())
             {
@@ -64,6 +58,7 @@ public class InputsAIEditor : Editor {
                 m_Target.inputs[index].name = newName;
                 m_Target.inputs[index].startValue = newStartValue;
                 m_Target.inputs[index].currentValue = newCurrentValue;
+                m_Target.inputs[index].isActive = newIsActive;
 
                 EditorUtility.SetDirty(m_Target);
             }

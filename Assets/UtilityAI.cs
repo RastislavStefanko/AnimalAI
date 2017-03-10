@@ -37,6 +37,17 @@ public class UtilityAI : MonoBehaviour {
         }
     }
 
+    public void SetValue(string inputName, float value)
+    {
+        for (int i = 0; i < values.inputs.Count; i++)
+        {
+            if (values.inputs[i].name == inputName)
+            {
+                values.inputs[i].currentValue = value;
+            }
+        }
+    }
+
     public void PlusValue(string inputName, float value)
     {
         for (int i = 0; i < values.inputs.Count; i++)

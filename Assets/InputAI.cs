@@ -8,5 +8,5 @@ public class InputAI {
     public string name = "";
     public float startValue = 0;
     public float currentValue = 0;
-    
+    public bool isActive = true;
 }

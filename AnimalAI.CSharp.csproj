@@ -89,12 +89,14 @@
     <Compile Include="Assets\GroupBehavior.cs" />
     <Compile Include="Assets\InputAI.cs" />
     <Compile Include="Assets\InputsAI.cs" />
+    <Compile Include="Assets\Trees.cs" />
     <Compile Include="Assets\UtilityAI.cs" />
     <Compile Include="Assets\UtilityComponent.cs" />
     <Compile Include="Assets\WaypointMove.cs" />
     <Compile Include="Assets\areaDetect.cs" />
     <Compile Include="Assets\lol.cs" />
     <Compile Include="Assets\lolghj.cs" />
+    <Compile Include="Assets\treeScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
