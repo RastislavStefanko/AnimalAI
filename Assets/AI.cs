@@ -46,7 +46,7 @@ public class AI : MonoBehaviour
     void Update()
     {
         Time.timeScale = timeSpeed;
-        Debug.Log(giraffeAI.GetUtility());
+       // Debug.Log(giraffeAI.GetUtility());
         agent.destination = currentDestination.transform.position;
 
         if (waitUntilDone <= 0)

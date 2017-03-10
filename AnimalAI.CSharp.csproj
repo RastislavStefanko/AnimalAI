@@ -85,11 +85,14 @@
     <Compile Include="Assets\DayNight.cs" />
     <Compile Include="Assets\EatDetection.cs" />
     <Compile Include="Assets\GiraffeEat.cs" />
+    <Compile Include="Assets\GizmoDraw.cs" />
+    <Compile Include="Assets\GroupBehavior.cs" />
     <Compile Include="Assets\InputAI.cs" />
     <Compile Include="Assets\InputsAI.cs" />
     <Compile Include="Assets\UtilityAI.cs" />
     <Compile Include="Assets\UtilityComponent.cs" />
     <Compile Include="Assets\WaypointMove.cs" />
+    <Compile Include="Assets\areaDetect.cs" />
     <Compile Include="Assets\lol.cs" />
     <Compile Include="Assets\lolghj.cs" />
   </ItemGroup>

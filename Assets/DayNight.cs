@@ -13,7 +13,7 @@ public class DayNight : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.RotateAround(Vector3.zero, Vector3.right, speed * Time.deltaTime);
+        transform.RotateAround(Vector3.zero, Vector3.right,     speed * Time.deltaTime);
 
 	}
 }
