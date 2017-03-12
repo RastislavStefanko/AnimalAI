@@ -32,8 +32,6 @@ public class AI : MonoBehaviour
 
     public UtilityAI giraffeAI;
 
-    [Range(0, 10)]
-    public float timeSpeed = 1;
 
     void Start()
     {
@@ -45,7 +43,6 @@ public class AI : MonoBehaviour
 
     void Update()
     {
-        Time.timeScale = timeSpeed;
         agent.destination = currentDestination.transform.position;
 
         if (waitUntilDone <= 0)
@@ -67,6 +64,8 @@ public class AI : MonoBehaviour
                     }
                     break;
                 case "thirst":
+                    eat = false;
+
                     currentDestination = gameObject;
                     if (currentDestination.tag != "water")
                     {
@@ -79,6 +78,8 @@ public class AI : MonoBehaviour
                     }
                     break;
                 case "sleep":
+                    eat = false;
+
                     giraffeAI.SetValue("sleep");
                     giraffeAI.SetValue("walk");
                     waitUntilDone = 30;
@@ -86,6 +87,8 @@ public class AI : MonoBehaviour
                     anim.SetBool("sleep", true);
                     break;
                 case "findGroup":
+                    eat = false;
+
                     anim.SetBool("sleep", false);
                     anim.SetBool("drink", false);
                     anim.SetBool("eat", false);
@@ -143,7 +146,7 @@ public class AI : MonoBehaviour
             
             if (!isSee)
             {
-                transform.Rotate(0, -timeSpeed, 0);
+                transform.Rotate(0, -1 * Time.timeScale, 0);
             }
         }
 
@@ -202,7 +205,7 @@ public class AI : MonoBehaviour
 
             if (currentDestination.tag != "leafs")
             {
-                transform.Rotate(0, -timeSpeed, 0);
+                transform.Rotate(0, -1 * Time.timeScale, 0);
             }
         }
         else
@@ -246,7 +249,7 @@ public class AI : MonoBehaviour
 
         if (currentDestination.tag != "water")
         {
-            transform.Rotate(0, -timeSpeed, 0);
+            transform.Rotate(0, -1 * Time.timeScale, 0);
         }
 
     }
@@ -256,7 +259,6 @@ public class AI : MonoBehaviour
 
         if (collision.transform.tag == "leafs")
         {
-            Debug.Log(collision.transform.name);
             eat = true;
         }
 

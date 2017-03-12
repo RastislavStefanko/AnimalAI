@@ -84,6 +84,7 @@
     <Compile Include="Assets\AI.cs" />
     <Compile Include="Assets\DayNight.cs" />
     <Compile Include="Assets\EatDetection.cs" />
+    <Compile Include="Assets\GameSpeed.cs" />
     <Compile Include="Assets\GiraffeEat.cs" />
     <Compile Include="Assets\GizmoDraw.cs" />
     <Compile Include="Assets\GroupBehavior.cs" />
