@@ -33,6 +33,8 @@ public class AI : MonoBehaviour
     public UtilityAI giraffeAI;
 
 
+    private float findWaterProblem;
+
     void Start()
     {
         eat = false;
